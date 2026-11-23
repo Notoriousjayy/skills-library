@@ -1,0 +1,27 @@
+name: Validate security Agent Skills
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install project
+        run: python -m pip install -e '.[dev]'
+      - name: Validate local skill structure
+        run: python -m security_skills.cli validate skills
+      - name: Unit and integration tests
+        run: pytest -q
+      - name: Ruff lint
+        run: ruff check .
+      - name: Validate official Agent Skills format
+        run: |
+          python -m pip install 'git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref'
+          for skill in skills/*; do skills-ref validate "$skill"; done
