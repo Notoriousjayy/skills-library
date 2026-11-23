@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "cases": [
+    {
+      "id": "python-sqli-vulnerable",
+      "file": "python-sqli-vulnerable.py",
+      "language": "Python",
+      "ground_truth": "vulnerable",
+      "expected_cwe": "CWE-89",
+      "review_question": "Inspect query construction and whether `username` becomes query syntax."
+    },
+    {
+      "id": "python-sqli-safe",
+      "file": "python-sqli-safe.py",
+      "language": "Python",
+      "ground_truth": "secure",
+      "expected_cwe": null,
+      "review_question": "Verify actual parameter binding; no SQL injection finding is expected."
+    },
+    {
+      "id": "path-traversal-vulnerable",
+      "file": "path-traversal-vulnerable.py",
+      "language": "Python",
+      "ground_truth": "vulnerable",
+      "expected_cwe": "CWE-22",
+      "review_question": "Consider whether `name` can escape the intended root."
+    },
+    {
+      "id": "path-traversal-safe",
+      "file": "path-traversal-safe.py",
+      "language": "Python",
+      "ground_truth": "secure",
+      "expected_cwe": null,
+      "review_question": "Check resolution and containment of user-provided paths on Python 3.9+."
+    },
+    {
+      "id": "credential-vulnerable",
+      "file": "credential-vulnerable.py",
+      "language": "Python",
+      "ground_truth": "vulnerable",
+      "expected_cwe": "CWE-798",
+      "review_question": "Synthetic token is not real; check hardcoding pattern, not token validity."
+    },
+    {
+      "id": "credential-false-positive",
+      "file": "credential-false-positive.py",
+      "language": "Python",
+      "ground_truth": "secure",
+      "expected_cwe": null,
+      "review_question": "Do not classify an obvious placeholder in a test example as a live secret."
+    },
+    {
+      "id": "authorization-vulnerable",
+      "file": "authorization-vulnerable.py",
+      "language": "Python",
+      "ground_truth": "vulnerable",
+      "expected_cwe": "CWE-862",
+      "review_question": "Assume user-provided ID; inspect authorization decision and data-layer contract."
+    },
+    {
+      "id": "authorization-safe",
+      "file": "authorization-safe.py",
+      "language": "Python",
+      "ground_truth": "secure",
+      "expected_cwe": null,
+      "review_question": "Validate the implied data-layer enforcement before claiming this is safe."
+    },
+    {
+      "id": "c-bounds-vulnerable",
+      "file": "c-bounds-vulnerable.c",
+      "language": "C",
+      "ground_truth": "vulnerable",
+      "expected_cwe": "CWE-120",
+      "review_question": "Unbounded copy of caller-controlled data to a fixed buffer."
+    },
+    {
+      "id": "c-integer-vulnerable",
+      "file": "c-integer-vulnerable.c",
+      "language": "C",
+      "ground_truth": "vulnerable",
+      "expected_cwe": "CWE-190",
+      "review_question": "Check multiplication overflow if used as an allocation size."
+    },
+    {
+      "id": "inconclusive-auth",
+      "file": "inconclusive-auth.py",
+      "language": "Python",
+      "ground_truth": "inconclusive",
+      "expected_cwe": null,
+      "review_question": "Cannot determine whether the service performs authorization from this snippet."
+    },
+    {
+      "id": "sarif-valid-invalid",
+      "file": "sarif-valid-invalid.json",
+      "language": "JSON",
+      "ground_truth": "structural",
+      "expected_cwe": null,
+      "review_question": "A valid document; invalid variant omits runs or has an unexpected SARIF version."
+    }
+  ]
+}
